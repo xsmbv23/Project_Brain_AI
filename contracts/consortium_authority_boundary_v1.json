@@ -1,0 +1,40 @@
+{
+  "contract_id": "CONSORTIUM_AUTHORITY_BOUNDARY_V1",
+  "status": "CANONICAL_ARCHITECTURAL_INVARIANT",
+  "authority_model": {
+    "forensic_authority_count": 1,
+    "authority_owner": "BRAIN",
+    "consortium_forensic_state_authority": false,
+    "consortium_promotion_authority": false,
+    "worker_promotion_authority": false
+  },
+  "allowed_worker_state": ["TASK_PENDING", "TASK_RUNNING", "RESULT_SUCCESS", "RESULT_FAILURE", "RESULT_UNKNOWN", "RESULT_HOLD", "RESULT_CONFLICT", "RETRY", "STALE", "RETIRED"],
+  "forbidden_worker_state_semantics": ["FORENSIC_PASS", "FORENSIC_PROMOTION", "CANONICAL_TRUTH", "GATE_OPEN"],
+  "invariants": [
+    "ONE_FORENSIC_AUTHORITY",
+    "CONSORTIUM_HAS_NO_PROMOTION_AUTHORITY",
+    "CONSENSUS_IS_NOT_EVIDENCE",
+    "WORKER_RESULT_IS_NOT_FORENSIC_PASS",
+    "CURRENT_TOPOLOGY_IS_NOT_IMMUTABLE_DOCTRINE",
+    "NO_PASS_INHERITANCE",
+    "LOCAL_GATE_OWNS_LOCAL_EVIDENCE"
+  ],
+  "topology_policy": {
+    "current_workers": "implementation_topology",
+    "worker_count_is_doctrine": false,
+    "adding_or_removing_workers_requires_governed_contract_update": true
+  },
+  "memory_policy": {
+    "layers": ["CANONICAL_STATE", "EVIDENCE_HISTORY", "TASK_TRACE", "WORKER_MEMORY", "EPHEMERAL_CONTEXT"],
+    "ephemeral_context_is_evidence": false,
+    "worker_memory_is_evidence": false,
+    "evidence_is_state": false,
+    "state_is_doctrine": false
+  },
+  "quant_boundary": {
+    "consortium_may_request": ["QUESTION", "HYPOTHESIS", "TEST", "REPLAY", "BACKTEST_REQUEST", "ANALYSIS_REQUEST"],
+    "quant_result_is_evidence_only_after_its_own_gate": true,
+    "consortium_may_not_convert_consensus_to_edge": true
+  },
+  "successor_rule": "A successor bot must read persistent canonical state, next_action, latest action record, relevant contract, and evidence references; conversation history is never the authority source."
+}
